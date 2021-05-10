@@ -1,7 +1,22 @@
 import logo from './../logo.svg';
 import './../styles/App.css';
+import Data from './Data';
+
+
 
 function App() {
+
+  const testData = {
+    "store": "play",
+    "seriesFilter":{
+        "app": ["com.percent.royaldice"],
+        "dateRel": 7,
+        "country": ["US"],
+        "category": ["GAME"],
+        "collection": ["topgrossing"]
+    }
+}
+
   return (
     <div className="App">
       <header className="App-header">
@@ -18,6 +33,7 @@ function App() {
           Learn React
         </a>
       </header>
+      <Data props={testData} />
     </div>
   );
 }
