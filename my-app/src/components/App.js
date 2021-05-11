@@ -1,6 +1,7 @@
 import logo from './../logo.svg';
 import './../styles/App.css';
 import Data from './Data';
+import DoubleData from './DoubleData';
 
 
 
@@ -15,25 +16,34 @@ function App() {
         "category": ["GAME"],
         "collection": ["topgrossing"]
     }
-}
+  }
+
+  const testDoubleData = {
+    "store": "ios",
+    "seriesFilter":{
+        "app": ["1085652055"],
+        "dateFrom": "2021-01-01",
+        "dateTo": "2021-01-07",
+        "platform": ["iPhone"],
+        "country": ["US"],
+        "category": ["ALL"]
+    }
+  }
 
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+
       </header>
-      <Data props={testData} />
+      {/* <Data props={testData} /> */}
+      <div>
+        <DoubleData props={testDoubleData} />
+        <DoubleData props={testDoubleData} />
+      </div>
     </div>
   );
 }

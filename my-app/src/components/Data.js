@@ -16,6 +16,7 @@ query series ($store: String!, $seriesFilter: SeriesFilter!) {
 
 
 
+
 function Data({ props }) {
   const { loading, error, data } = useQuery(FEED_QUERY, {
         variables: { 
