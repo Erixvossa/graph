@@ -42,14 +42,14 @@ function DoubleData({ props }) {
 
   if (loading) return 'Loading...';
   if (error) return `Error! ${error.message}`;
-  console.log(data);
+//   console.log(data);
   let gestimatesArr = data.gestimates.map(function(el) {
       return {
           gestimates: el.d,
           date: el.date
       }
   });
-  console.log(gestimatesArr)
+//   console.log(gestimatesArr)
   let sellingArr = data.selling.map(function(el) {
     return {
         selling: el.d,
@@ -58,7 +58,7 @@ function DoubleData({ props }) {
 });
 
   let joinData = gestimatesArr.map((item, i) => Object.assign({}, item, sellingArr[i]));
-  console.log(joinData);
+//   console.log(joinData);
 
 
   return (

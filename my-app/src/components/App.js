@@ -2,10 +2,13 @@ import logo from './../logo.svg';
 import './../styles/App.css';
 import Data from './Data';
 import DoubleData from './DoubleData';
+import React from 'react';
 
 
 
 function App() {
+  
+
 
   const testData = {
     "store": "play",
@@ -30,6 +33,23 @@ function App() {
     }
   }
 
+
+  const testDoubleDataString = JSON.stringify(testDoubleData);
+
+  const [data, setData] = React.useState(testDoubleData);
+  console.log(data);
+
+  function handleSubmit(evt) {
+    evt.preventDefault();
+
+    let newData = JSON.parse(document.querySelector('.form_textArea').value)
+    console.log(newData)
+    setData(newData);
+    console.log(data);
+  }
+
+  
+
   return (
     <div className="App">
       <header className="App-header">
@@ -41,7 +61,11 @@ function App() {
       </header>
       {/* <Data props={testData} /> */}
       <div>
-        <DoubleData props={testDoubleData} />
+        <form className='form'>
+          <textarea className='form_textArea' placeholder={testDoubleDataString}>{testDoubleDataString}</textarea>
+          <button className='form_submit' type='submit' onClick={handleSubmit}>Нажми меня</button>
+        </form>
+        <DoubleData className="graph" props={data} />
         <DoubleData props={testDoubleData} />
       </div>
     </div>
