@@ -34,39 +34,68 @@ export const DataSeriesGraph = ({ props }) => {
 
     if (loading) return 'Loading...';
     if (error) return `Error! ${error.message}`;
-    // console.log(data);
+    console.log(data);
     let gestimatesArr = data.gestimates.map(function(el) {
         return {
-            gestimates: el.d,
-            date: el.date
+            
+            date: el.date,
+            gestimates: el.d
         }
     });
-    // console.log(gestimatesArr)
+    //console.log(gestimatesArr)
     let revenueArr = data.revenue.map(function(el) {
       return {
+            
+            date: el.date,
             revenue: el.r,
-            date: el.date
       }
     });
-  
-    let joinData = gestimatesArr.map((item, i) => Object.assign({}, item, revenueArr[i]));
+  //console.log(revenueArr);
+
+  let sellingArr = data.selling.map(function(el) {
+    return {
+          
+          date: el.date,
+          selling: el.d
+    }
+  });
+  //console.log(sellingArr);
+    // let joinData = gestimatesArr.map((item, i) => Object.assign({}, item, revenueArr[i]));
     // console.log(joinData);
 
-    let sellingArr = data.selling.map(function(el) {
-      return {
-            selling: el.d,
-            date: el.date
-      }
-    });
+
+    
+    function merge(arr1 = [], arr2 = []) {
+      return Object.values(
+        arr1.concat(arr2).reduce(
+          (acc, curr) => ({
+            ...acc,
+            [curr.date]: { ...(acc[curr.date] ?? {}), ...curr },
+          }),
+          {}
+        )
+      );
+    }
+    
+    const merged = merge(gestimatesArr, sellingArr);
+    const merged2 = merge(merged, revenueArr);
+    console.log(merged2);
+
+
+
+
+
+
+
   
-    let joinDataSecond = joinData.map((item, i) => Object.assign({}, item, sellingArr[i]));
+    // let joinDataSecond = joinData.map((item, i) => Object.assign({}, item, sellingArr[i]));
     // console.log(joinDataSecond);
   
   
     return (
       <div name="data">
-      <GraphSeriesGRevenue data={joinDataSecond} />
-      <GraphSeriesGDownloads data={joinDataSecond} />
+      <GraphSeriesGRevenue data={merged2} />
+      <GraphSeriesGDownloads data={merged2} />
       </div>
     );
   }
