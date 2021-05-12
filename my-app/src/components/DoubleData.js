@@ -1,19 +1,9 @@
 import { useQuery, gql } from '@apollo/client';
-import Graph from './Graph';
+import { GraphSeriesGDownloads, GraphSeriesGRevenue } from './GraphComponents';
 
 
-const FEED_QUERY = gql`
-query series ($store: String!, $seriesFilter: SeriesFilter!) {
-    series {
-    positions(store: $store, filter: $seriesFilter) {
-        date
-        value
-        }
-    }
-}
-`;
 
-const DOUBLE_QUERY = gql`
+const QUERY_DATA = gql`
 query series ($store: String!, $seriesFilter: SeriesFilter!) {
   selling:positions(store: $store, filter: $seriesFilter) {
       date
@@ -23,52 +13,61 @@ query series ($store: String!, $seriesFilter: SeriesFilter!) {
       date
       d
   }
-}
+  revenue:gestimates(store: $store, filter: $seriesFilter) {
+        date
+        r
+    }
+  }
 `;
 
 
+export const DataSeriesGraph = ({ props }) => {
+    const { loading, error, data } = useQuery(QUERY_DATA, {
+          variables: { 
+          store: props.store,
+          seriesFilter: props.seriesFilter 
+      },
+    });
+  
+  
+  
 
-
-function DoubleData({ props }) {
-  const { loading, error, data } = useQuery(DOUBLE_QUERY, {
-        variables: { 
-        store: props.store,
-        seriesFilter: props.seriesFilter 
-    },
-  });
-
-
-
-
-  if (loading) return 'Loading...';
-  if (error) return `Error! ${error.message}`;
-//   console.log(data);
-  let gestimatesArr = data.gestimates.map(function(el) {
+    if (loading) return 'Loading...';
+    if (error) return `Error! ${error.message}`;
+    // console.log(data);
+    let gestimatesArr = data.gestimates.map(function(el) {
+        return {
+            gestimates: el.d,
+            date: el.date
+        }
+    });
+    // console.log(gestimatesArr)
+    let revenueArr = data.revenue.map(function(el) {
       return {
-          gestimates: el.d,
-          date: el.date
+            revenue: el.r,
+            date: el.date
       }
-  });
-//   console.log(gestimatesArr)
-  let sellingArr = data.selling.map(function(el) {
-    return {
-        selling: el.d,
-        date: el.date
-    }
-});
+    });
+  
+    let joinData = gestimatesArr.map((item, i) => Object.assign({}, item, revenueArr[i]));
+    // console.log(joinData);
 
-  let joinData = gestimatesArr.map((item, i) => Object.assign({}, item, sellingArr[i]));
-//   console.log(joinData);
+    let sellingArr = data.selling.map(function(el) {
+      return {
+            selling: el.d,
+            date: el.date
+      }
+    });
+  
+    let joinDataSecond = joinData.map((item, i) => Object.assign({}, item, sellingArr[i]));
+    // console.log(joinDataSecond);
+  
+  
+    return (
+      <div name="data">
+      <GraphSeriesGRevenue data={joinDataSecond} />
+      <GraphSeriesGDownloads data={joinDataSecond} />
+      </div>
+    );
+  }
 
-
-  return (
-    <div name="data">
-        {/* {data.series.positions.map(({ date, d }) => (
-            <p key={date}>{`${date} ${d}`}</p>
-          ))} */}
-    <Graph data={joinData} />
-    </div>
-  );
-}
-
-export default DoubleData;
