@@ -10,16 +10,19 @@ export const GraphSeriesGDownloads = ({ data }) => {
     meta: {
       date: {
         type: 'time',
+
       },
     },
     geometryOptions: [
       {
         geometry: 'line',
         color: '#5B8FF9',
+        connectNulls: true,
       },
       {
         geometry: 'line',
         color: '#5AD8A6',
+        connectNulls: true,
       },
     ],
   };
@@ -33,14 +36,22 @@ export const GraphSeriesGRevenue = ({ data }) => {
   data: [data, data],
   xField: 'date',
   yField: ['revenue', 'gestimates'],
+  meta: {
+    date: {
+      type: 'time',
+
+    },
+  },
   geometryOptions: [
     {
       geometry: 'line',
       color: '#5B8FF9',
+      connectNulls: true,
     },
     {
       geometry: 'line',
       color: '#5AD8A6',
+      connectNulls: true,
     },
   ],
 };

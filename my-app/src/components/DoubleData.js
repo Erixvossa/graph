@@ -84,6 +84,9 @@ export const DataSeriesGraph = ({ props }) => {
     merged2.sort((a,b) => new Date(a.date).getTime() - new Date(b.date).getTime());
     console.log(merged2);
 
+    // merged2.push({date: "2021-02-15", gestimates: 4500, selling: 650, revenue: 11000});
+    // merged2.push({date: "2021-02-16", gestimates: 4555, selling: 700, revenue: 11229});
+
 
   
     // let joinDataSecond = joinData.map((item, i) => Object.assign({}, item, sellingArr[i]));
