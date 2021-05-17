@@ -7,6 +7,11 @@ export const GraphSeriesGDownloads = ({ data }) => {
     data: [data, data],
     xField: 'date',
     yField: ['selling', 'gestimates'],
+    meta: {
+      date: {
+        type: 'time',
+      },
+    },
     geometryOptions: [
       {
         geometry: 'line',

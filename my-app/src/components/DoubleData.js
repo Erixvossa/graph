@@ -81,8 +81,8 @@ export const DataSeriesGraph = ({ props }) => {
     const merged2 = merge(merged, revenueArr);
     console.log(merged2);
 
-
-
+    merged2.sort((a,b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+    console.log(merged2);
 
 
 
@@ -94,8 +94,8 @@ export const DataSeriesGraph = ({ props }) => {
   
     return (
       <div name="data">
-      <GraphSeriesGRevenue data={merged2} />
       <GraphSeriesGDownloads data={merged2} />
+      <GraphSeriesGRevenue data={merged2} />
       </div>
     );
   }
