@@ -85,8 +85,6 @@ export const DataSeriesGraph = ({ props }) => {
     console.log(merged2);
 
 
-
-
   
     // let joinDataSecond = joinData.map((item, i) => Object.assign({}, item, sellingArr[i]));
     // console.log(joinDataSecond);
