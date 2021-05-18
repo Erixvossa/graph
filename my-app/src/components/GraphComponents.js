@@ -39,8 +39,11 @@ export const GraphSeriesGRevenue = ({ data }) => {
   meta: {
     date: {
       type: 'time',
-
     },
+    //настройка переворачивающая ось Y для gestimates
+    gestimates: {
+      range: [1, 0]
+    }
   },
   geometryOptions: [
     {
