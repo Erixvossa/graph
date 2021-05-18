@@ -5,17 +5,7 @@ import React from 'react';
 
 
 function App() {
-    const testDoubleData = {
-    "store": "ios",
-    "seriesFilter":{
-        "app": ["1085652055"],
-        "dateFrom": "2021-01-01",
-        "dateTo": "2021-01-07",
-        "platform": ["iPhone"],
-        "country": ["US"],
-        "category": ["ALL"]
-    }
-  }
+    const testDoubleData = {"store":"ios","seriesFilter":{"app":["1085652055"],"dateFrom":"2021-01-01","dateTo":"2021-07-07","platform":["iPhone"],"country":["US"],"category":["ALL"]}}
 
 
 

@@ -10,13 +10,19 @@ export const GraphSeriesGDownloads = ({ data }) => {
     meta: {
       date: {
         type: 'time',
-
+        
       },
+          //настройка переворачивающая ось Y для gestimates
+    selling: {
+      range: [1, 0],
+      max: 1500,
+      min:1,
+    },
     },
     geometryOptions: [
       {
         geometry: 'line',
-        color: '#5B8FF9',
+        color: '#FF0000',
         connectNulls: true,
       },
       {
@@ -40,10 +46,6 @@ export const GraphSeriesGRevenue = ({ data }) => {
     date: {
       type: 'time',
     },
-    //настройка переворачивающая ось Y для gestimates
-    gestimates: {
-      range: [1, 0]
-    }
   },
   geometryOptions: [
     {
