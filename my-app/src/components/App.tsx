@@ -1,7 +1,7 @@
 import './../styles/App.css';
 import { DataSeriesGraph } from './DoubleData';
+import { GraphSeriesGDownloads, GraphSeriesGRevenue } from './GraphComponents';
 import React from 'react';
-
 
 
 function App() {
@@ -14,16 +14,20 @@ function App() {
   const [data, setData] = React.useState(testDoubleData);
   // console.log(data);
 
-  function handleSubmit(evt) {
+  function handleSubmit(evt: { preventDefault: () => void; }) {
     evt.preventDefault();
 
-    let newData = JSON.parse(document.querySelector('.form_textArea').value)
+    let formTextAreaVale: any;
+    // @ts-ignore
+    formTextAreaVale = document.querySelector('.form_textArea').value;
+    let newData = JSON.parse(formTextAreaVale)
     // console.log(newData)
     setData(newData);
     // console.log(data);
   }
 
   
+
 
   return (
     <div className="App">

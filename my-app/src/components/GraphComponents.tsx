@@ -1,7 +1,11 @@
 import React from 'react';
 import { DualAxes } from '@ant-design/charts';
 
-export const GraphSeriesGDownloads = ({ data }) => {
+interface graphSeriesProps {
+    data: any;
+}
+
+export const GraphSeriesGDownloads = ({ data }: graphSeriesProps) => {
   
     const config = {
     data: [data, data],
@@ -36,7 +40,7 @@ export const GraphSeriesGDownloads = ({ data }) => {
     return <DualAxes {...config} />;
 };
 
-export const GraphSeriesGRevenue = ({ data }) => {
+export const GraphSeriesGRevenue = ({ data }: graphSeriesProps) => {
   
   const config = {
   data: [data, data],

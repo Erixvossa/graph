@@ -20,8 +20,12 @@ query series ($store: String!, $seriesFilter: SeriesFilter!) {
   }
 `;
 
+interface graphSeriesPropsGraph {
+    props: any;
+}
 
-export const DataSeriesGraph = ({ props }) => {
+
+export const DataSeriesGraph = ({ props }: graphSeriesPropsGraph) => {
     const { loading, error, data } = useQuery(QUERY_DATA, {
           variables: { 
           store: props.store,
@@ -35,7 +39,7 @@ export const DataSeriesGraph = ({ props }) => {
     if (loading) return 'Loading...';
     if (error) return `Error! ${error.message}`;
     console.log(data);
-    let gestimatesArr = data.gestimates.map(function(el) {
+    let gestimatesArr = data.gestimates.map(function(el: any) {
         return {
             
             date: el.date,
@@ -43,7 +47,7 @@ export const DataSeriesGraph = ({ props }) => {
         }
     });
     //console.log(gestimatesArr)
-    let revenueArr = data.revenue.map(function(el) {
+    let revenueArr = data.revenue.map(function(el: any) {
       return {
             
             date: el.date,
@@ -52,7 +56,7 @@ export const DataSeriesGraph = ({ props }) => {
     });
   //console.log(revenueArr);
 
-  let sellingArr = data.selling.map(function(el) {
+  let sellingArr = data.selling.map(function(el: any) {
     return {
           
           date: el.date,
@@ -66,10 +70,12 @@ export const DataSeriesGraph = ({ props }) => {
 
     
     function merge(arr1 = [], arr2 = []) {
-      return Object.values(
+
+        return Object.values(
         arr1.concat(arr2).reduce(
           (acc, curr) => ({
             ...acc,
+              // @ts-ignore
             [curr.date]: { ...(acc[curr.date] ?? {}), ...curr },
           }),
           {}
@@ -78,9 +84,11 @@ export const DataSeriesGraph = ({ props }) => {
     }
     
     const merged = merge(gestimatesArr, sellingArr);
+    // @ts-ignore
     const merged2 = merge(merged, revenueArr);
     console.log(merged2);
 
+    // @ts-ignore
     merged2.sort((a,b) => new Date(a.date).getTime() - new Date(b.date).getTime());
     console.log(merged2);
 
@@ -93,8 +101,10 @@ export const DataSeriesGraph = ({ props }) => {
     // console.log(joinDataSecond);
   
   
+
+    // @ts-ignore
     return (
-      <div name="data">
+      <div className="data">
       <GraphSeriesGDownloads data={merged2} />
       <GraphSeriesGRevenue data={merged2} />
       </div>
