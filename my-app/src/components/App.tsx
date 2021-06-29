@@ -1,6 +1,5 @@
 import './../styles/App.css';
 import { DataSeriesGraph } from './DoubleData';
-import { GraphSeriesGDownloads, GraphSeriesGRevenue } from './GraphComponents';
 import React from 'react';
 
 
