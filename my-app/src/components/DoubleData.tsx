@@ -21,12 +21,12 @@ query series ($store: String!, $seriesFilter: SeriesFilter!) {
 `;
 
 interface graphSeriesPropsGraph {
-    props: any;
+    props:  {store: string, seriesFilter: {app: string[], dateFrom: string, dateTo: string, platform: string[], country: string[], category: string[]}};
 }
 
 
 
-export function DataSeriesGraph(     {props}: graphSeriesPropsGraph): JSX.Element {
+export const DataSeriesGraph = (     {props}: graphSeriesPropsGraph): JSX.Element | null => {
     const { loading, error, data } = useQuery(QUERY_DATA, {
           variables: { 
           store: props.store,
@@ -37,9 +37,15 @@ export function DataSeriesGraph(     {props}: graphSeriesPropsGraph): JSX.Elemen
   
   
 
-    // if (loading) return 'Loading...';
+    if (loading) return <>{'Please wait'}</>;
+
     // if (error) return `Error! ${error.message}`;
-    console.log(data);
+    if (error) return <>{`Error! ${error.message}`}</>;
+    // console.log(data.gestimates)
+    // if (!data.gestimates.length || !data.revenue.length || !data.selling.length) {
+    //     return <>{'какойтопустой'}</>
+    // }
+    // console.log(data);
     let gestimatesArr = data.gestimates.map(function(el: any) {
         return {
             
@@ -87,11 +93,11 @@ export function DataSeriesGraph(     {props}: graphSeriesPropsGraph): JSX.Elemen
     const merged = merge(gestimatesArr, sellingArr);
     // @ts-ignore
     const merged2 = merge(merged, revenueArr);
-    console.log(merged2);
+    //console.log(merged2);
 
     // @ts-ignore
     merged2.sort((a,b) => new Date(a.date).getTime() - new Date(b.date).getTime());
-    console.log(merged2);
+    //console.log(merged2);
 
     // merged2.push({date: "2021-02-15", gestimates: 4500, selling: 650, revenue: 11000});
     // merged2.push({date: "2021-02-16", gestimates: 4555, selling: 700, revenue: 11229});

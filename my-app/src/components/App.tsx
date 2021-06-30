@@ -2,6 +2,8 @@ import './../styles/App.css';
 import { DataSeriesGraph } from './DoubleData';
 import React from 'react';
 
+import {Header} from "./Header";
+
 
 const App: React.FC = () => {
     const testDoubleData = {"store":"ios","seriesFilter":{"app":["1085652055"],"dateFrom":"2021-01-01","dateTo":"2021-07-07","platform":["iPhone"],"country":["US"],"category":["ALL"]}}
@@ -10,7 +12,17 @@ const App: React.FC = () => {
 
   const testDoubleDataString = JSON.stringify(testDoubleData);
 
-  const [data, setData] = React.useState(testDoubleData);
+  const [data, setData] = React.useState<{
+      store: string;
+      seriesFilter: {
+          app: string[];
+          dateFrom: string;
+          dateTo: string;
+          platform: string[];
+          country: string[];
+          category: string[];
+      };
+  }>(testDoubleData);
   // console.log(data);
 
   function handleSubmit(evt: { preventDefault: () => void; }) {
@@ -31,6 +43,7 @@ const App: React.FC = () => {
   return (
     <div className="App">
       <header className="App-header">
+          <Header />
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>

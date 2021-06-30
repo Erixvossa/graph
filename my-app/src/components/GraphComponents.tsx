@@ -5,7 +5,7 @@ interface graphSeriesProps {
     data: any;
 }
 
-export const GraphSeriesGDownloads = ({ data }: graphSeriesProps) => {
+export const GraphSeriesGDownloads = ({ data }: graphSeriesProps): JSX.Element => {
   
     const config = {
     data: [data, data],
