@@ -25,7 +25,8 @@ interface graphSeriesPropsGraph {
 }
 
 
-export const DataSeriesGraph = ({ props }: graphSeriesPropsGraph) => {
+
+export function DataSeriesGraph(     {props}: graphSeriesPropsGraph): JSX.Element {
     const { loading, error, data } = useQuery(QUERY_DATA, {
           variables: { 
           store: props.store,
@@ -36,8 +37,8 @@ export const DataSeriesGraph = ({ props }: graphSeriesPropsGraph) => {
   
   
 
-    if (loading) return 'Loading...';
-    if (error) return `Error! ${error.message}`;
+    // if (loading) return 'Loading...';
+    // if (error) return `Error! ${error.message}`;
     console.log(data);
     let gestimatesArr = data.gestimates.map(function(el: any) {
         return {

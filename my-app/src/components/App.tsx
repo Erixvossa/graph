@@ -3,7 +3,7 @@ import { DataSeriesGraph } from './DoubleData';
 import React from 'react';
 
 
-function App() {
+const App: React.FC = () => {
     const testDoubleData = {"store":"ios","seriesFilter":{"app":["1085652055"],"dateFrom":"2021-01-01","dateTo":"2021-07-07","platform":["iPhone"],"country":["US"],"category":["ALL"]}}
 
 
